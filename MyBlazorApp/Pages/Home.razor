@@ -1,37 +1,45 @@
 
 @page "/"
+@using System.Text.Json
 
-<h3>File Reader</h3>
+<h3>JSON Reader</h3>
 <ul style="height: 200px; overflow-y: scroll;">
-    @foreach (var line in lines)
+    @foreach (var element in elements)
     {
-        <li>@line</li>
+        <li>@element</li>
     }
 </ul>
 
 @code {
-    private List<string> lines = new List<string>();
-    private List<string> fileLines = new List<string>
-    {
-        "Line 1: This is the first line.",
-        "Line 2: This is the second line.",
-        "Line 3: This is the third line.",
-        "Line 4: This is the fourth line.",
-        "Line 5: This is the fifth line."
-    };
+    private List<string> elements = new List<string>();
+    private List<JsonElement> jsonArray;
     private PeriodicTimer timer;
-    private int currentLineIndex = 0;
+    private int currentIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
+        // Simulated JSON data
+        string jsonData = @"
+        [
+            { ""name"": ""Alice"", ""age"": 30 },
+            { ""name"": ""Bob"", ""age"": 25 },
+            { ""name"": ""Charlie"", ""age"": 35 },
+            { ""name"": ""Diana"", ""age"": 28 },
+            { ""name"": ""Eve"", ""age"": 22 }
+        ]";
+
+        // Parse the JSON data
+        jsonArray = JsonSerializer.Deserialize<List<JsonElement>>(jsonData);
+
         timer = new PeriodicTimer(TimeSpan.FromSeconds(2));
 
         while (await timer.WaitForNextTickAsync())
         {
-            if (currentLineIndex < fileLines.Count)
+            if (currentIndex < jsonArray.Count)
             {
-                lines.Add(fileLines[currentLineIndex]);
-                currentLineIndex++;
+                var jsonObject = jsonArray[currentIndex];
+                elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
+                currentIndex++;
                 InvokeAsync(StateHasChanged);
             }
             else
@@ -42,6 +50,10 @@
         }
     }
 }
+
+
+
+
 
 
 
