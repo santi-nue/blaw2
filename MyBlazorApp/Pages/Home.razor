@@ -1,6 +1,6 @@
-
 @page "/"
 @using System.Text.Json
+@inject HttpClient Http
 
 <h3>JSON Reader</h3>
 <ul style="height: 200px; overflow-y: scroll;">
@@ -18,15 +18,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulated JSON data
-        string jsonData = @"
-        [
-            { ""name"": ""Alice"", ""age"": 30 },
-            { ""name"": ""Bob"", ""age"": 25 },
-            { ""name"": ""Charlie"", ""age"": 35 },
-            { ""name"": ""Diana"", ""age"": 28 },
-            { ""name"": ""Eve"", ""age"": 22 }
-        ]";
+        // Fetch the JSON data from the file
+        string jsonData = await Http.GetStringAsync("data.json");
 
         // Parse the JSON data
         jsonArray = JsonSerializer.Deserialize<List<JsonElement>>(jsonData);
