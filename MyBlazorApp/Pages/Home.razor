@@ -3,7 +3,7 @@
 @inject HttpClient Http
 
 <h3>JSON Reader</h3>
-<ul style="height: 200px; overflow-y: scroll;">
+<ul style="height: 500px; overflow-y: scroll;">
     @foreach (var element in elements)
     {
         <li>@element</li>
@@ -26,13 +26,31 @@
 
         timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 
-        while (await timer.WaitForNextTickAsync())
+         JsonNode element = jsonArray[index];
+         JsonArray staArray = element["state].AsArray();
+        // Console.WriteLine($"Element {index + 1}:");
+
+
+
+while (await timer.WaitForNextTickAsync())
         {
             if (currentIndex < jsonArray.Count)
             {
-                var jsonObject = jsonArray[currentIndex];
+                //var jsonObject = jsonArray[currentIndex];
                 //elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
-                elements.Add(currentIndex.ToString());
+    
+                JsonNode element = jsonArray[currentIndex];
+                JsonArray staArray = element["state].AsArray();
+                // Console.WriteLine($"Element {index + 1}:");
+
+                foreach (JsonArray staElement in staArray)
+                {
+                     // Console.WriteLine($"  - [{string.Join(", ", staElement)}]");
+                
+                      //elements.Add(currentIndex.ToString())
+
+                      elements.Add(string.Join(", ", staElement)) ;
+                } 
                 currentIndex++;
                 InvokeAsync(StateHasChanged);
             }
