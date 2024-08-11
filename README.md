@@ -1,5 +1,13 @@
 in settings pages -> deploy from gh-pages. 
 
+in actions give
+Read and write permissions
+
+and remove environments of gh_pages
+
+
+
+
 change action to the one of:
 https://github.com/BillyCool/GitHub-Pages-WASM-Template
 
