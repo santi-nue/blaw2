@@ -33,12 +33,20 @@
             {
                 //var jsonObject = jsonArray[currentIndex];
                 //elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
-    
-                JsonNode element = jsonArray[currentIndex];
+
+
+
+//JsonNode jsonNode = JsonNode.Parse(jsonArray[currentIndex]. ToString
+
+
+
+
+
+                var element = jsonArray[currentIndex];
                 JsonArray staArray = element["state"].AsArray();
                 // Console.WriteLine($"Element {index + 1}:");
 
-                foreach (JsonArray staElement in staArray)
+                foreach ( staElement in staArray)
                 {
                      // Console.WriteLine($"  - [{string.Join(", ", staElement)}]");
                 
