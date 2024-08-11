@@ -19,19 +19,20 @@
     protected override async Task OnInitializedAsync()
     {
         // Fetch the JSON data from the file
-        string jsonData = await Http.GetStringAsync("data.json");
+        string jsonData = await Http.GetStringAsync("responses.json");
 
         // Parse the JSON data
         jsonArray = JsonSerializer.Deserialize<List<JsonElement>>(jsonData);
 
-        timer = new PeriodicTimer(TimeSpan.FromSeconds(2));
+        timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 
         while (await timer.WaitForNextTickAsync())
         {
             if (currentIndex < jsonArray.Count)
             {
                 var jsonObject = jsonArray[currentIndex];
-                elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
+                //elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
+                elements.Add(currentIndex) ;
                 currentIndex++;
                 InvokeAsync(StateHasChanged);
             }
