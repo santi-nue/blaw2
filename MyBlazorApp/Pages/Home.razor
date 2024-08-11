@@ -32,7 +32,7 @@
             {
                 var jsonObject = jsonArray[currentIndex];
                 //elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
-                elements.Add(currentIndex) ;
+                elements.Add(currentIndex.ToString());
                 currentIndex++;
                 InvokeAsync(StateHasChanged);
             }
