@@ -42,7 +42,7 @@
                 //var element = jsonArray[currentIndex];
                 JsonArray staArray = element["states"].AsArray();
                 // Console.WriteLine($"Element {index + 1}:");
-
+               elements.Clear() ;
                 foreach ( JsonNode staElement in staArray)
                 {
                      // Console.WriteLine($"  - [{string.Join(", ", staElement)}]");
