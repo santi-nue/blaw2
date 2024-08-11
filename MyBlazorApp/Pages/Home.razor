@@ -46,7 +46,7 @@
                 foreach ( JsonNode staElement in staArray)
                 {
                  // elements.Add(string.Join(", ", staElement)) ;
-                  elements.Add(string.Join(", ", staElement[5]).Join(", ", staElement[6])  ) ;
+                  elements.Add(string.Join("\t", staElement[5]), staElement[6])  ) ;
                 } 
                 currentIndex++;
                 InvokeAsync(StateHasChanged);
