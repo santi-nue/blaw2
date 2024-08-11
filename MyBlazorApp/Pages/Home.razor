@@ -40,7 +40,7 @@ while (await timer.WaitForNextTickAsync())
                 //elements.Add(JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true }));
     
                 JsonNode element = jsonArray[currentIndex];
-                JsonArray staArray = element["state].AsArray();
+                JsonArray staArray = element["state"].AsArray();
                 // Console.WriteLine($"Element {index + 1}:");
 
                 foreach (JsonArray staElement in staArray)
